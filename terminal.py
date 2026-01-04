@@ -4,6 +4,9 @@ import json
 
 def terminal():
 	running = True
+	with open("words.json", "r") as file: # Open words.json with read permissions as 'file'
+		word_dict = json.load(file) # creates a dictionary of one entry: "words" -> the 5000 words
+	words = word_dict["words"] # Create a list of that entry
 	rprint("[bold blue]Welcome to the terminal![/] Enter 'help' for a list of commands.", end = "")
 	while running:
 		user_command = input(" > ").lower()
@@ -14,7 +17,7 @@ def terminal():
 		elif user_command == "calculator":
 			calculator()
 		elif user_command == "wordle":
-			wordle()
+			wordle(words)
 		elif user_command == "help":
 			print(
 				"'help': Return this list of useful commands.\n"
@@ -59,21 +62,21 @@ def number_game():
 def calculator():
 	playing = True
 	while playing == True:
-		num_1 = int(input("Enter first number > "))
+		num_1 = float(input("Enter first number > "))
 		op = input("Enter operator [+, -, *, /] > ")
-		num_2 = int(input("Enter second number > "))
+		num_2 = float(input("Enter second number > "))
 		while op not in ("+", "-", "*", "/"):
 			rprint(f"[bold red]Error detected[/]: operator {op} invalid. Try entering the operator again", end = "")
 			op = input("Enter operator [+, -, *, /] > ")
 		if op == "+":
-			result = num_1 + num_2
+			result = round((num_1 + num_2), 2)
 		elif op == "-":
-			result = num_1 - num_2
+			result = round((num_1 - num_2), 2)
 		elif op == "*":
-			result = num_1 * num_2
+			result = round((num_1 * num_2), 2)
 		elif op == "/":
-			result = num_1 / num_2
-		rprint(f"The result is [bold blue]{result}[/]. Would you like to calculate again?", end = "")
+			result = round((num_1 / num_2), 2)
+		rprint(f"The result is ~[bold blue]{result}[/]. Would you like to calculate again?", end = "")
 		playing = check_restart()
 
 def validate_answer(answer, guess):
@@ -102,7 +105,7 @@ def print_validated_answer(validated):
 		rprint(f"[{colour}]{letter}[/]", end = " ")
 	print()
 
-def wordle():
+def wordle(words):
 	playing = True
 	while playing == True:
 		count = 1
@@ -118,10 +121,5 @@ def wordle():
 		else:
 			rprint(f"[bold green]Congrats![/] You successfully guessed the mystery word [bold blue]{answer}[/] in 6 tries or less! Want to play again?")
 		playing = check_restart()
-
-# Start main program and load words.json (only needs to happen once)
-with open("words.json", "r") as file:
-	word_dict = json.load(file)
-	words = word_dict["words"]
 
 terminal()
