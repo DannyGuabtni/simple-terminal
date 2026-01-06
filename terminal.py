@@ -76,7 +76,7 @@ def calculator():
 			result = round((num_1 * num_2), 2)
 		elif op == "/":
 			result = round((num_1 / num_2), 2)
-		rprint(f"The result is ~[bold blue]{result}[/]. Would you like to calculate again?", end = "")
+		rprint(f"The result is ~[bold blue]{result:,}[/]. Would you like to calculate again?", end = "")
 		playing = check_restart()
 
 def validate_answer(answer, guess):
