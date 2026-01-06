@@ -69,14 +69,14 @@ def calculator():
 			rprint(f"[bold red]Error detected[/]: operator {op} invalid. Try entering the operator again", end = "")
 			op = input("Enter operator [+, -, *, /] > ")
 		if op == "+":
-			result = round((num_1 + num_2), 2)
+			result = (num_1 + num_2)
 		elif op == "-":
-			result = round((num_1 - num_2), 2)
+			result = (num_1 - num_2)
 		elif op == "*":
-			result = round((num_1 * num_2), 2)
+			result = (num_1 * num_2)
 		elif op == "/":
-			result = round((num_1 / num_2), 2)
-		rprint(f"The result is ~[bold blue]{result:,}[/]. Would you like to calculate again?", end = "")
+			result = (num_1 / num_2)
+		rprint(f"The result is ~[bold blue]{result:,.2f}[/]. Would you like to calculate again?", end = "")
 		playing = check_restart()
 
 def validate_answer(answer, guess):
